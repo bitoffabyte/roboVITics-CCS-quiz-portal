@@ -24,14 +24,16 @@ const Landing = ({ updateMail, updateAuth }) => {
 	const [loading, updateLoading] = useState(true);
 	const mail = useRef('');
 	// const [fb, ufb] = useState(firebase.auth().currentUser.email);
+
 	const rules = [
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+		'Make sure that you attempt the exam from a laptop/desktop and have good internet connectivity. ',
+		'The duration of the test is 1 hour. An additional 15 minutes will be provided at the end for uploading the answer script. No extra time will be provided.',
+		'No change of slots will be entertained (under critical circumstances get in touch with your mentors).',
+		'No malpractices should be followed while giving the exam. Anyone found doing so will be debarred from the exam.',
+		'In case, any issues are faced while attempting the exam, the assigned mentor only should be contacted.',
+		'There are multiple sections in the test. It is mandatory to attempt the Management and logical reasoning sections and at least one of the three technical sections provided (CSE, Electrical , Mechanical). You can attempt multiple sections.',
+		'For MCQs, write down the option as well as the answer clearly [ex: b) python].',
+		'Answers should be written on paper only, scanned (as a pdf)  and uploaded with the name of the file in the following format: RegistrationNumber_FirstName_LastName.pdf.',
 	];
 	const handleClick = () => {
 		updateLoading(true);

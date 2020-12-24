@@ -38,7 +38,7 @@
 	width: 40vw;
 }
 .lbody {
-	width: 85%;
+	width: 75%;
 	margin-left: 15%;
 }
 .rules {
@@ -55,15 +55,19 @@
 	font-size: 28px;
 	color: #808080;
 }
+ul {
+	width: 85%;
+}
 ul li {
 	color: #c4c4c4;
 
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 1.2vw;
+	font-size: 1vw;
 	line-height: 1.2vw;
 	margin: 2% 0;
+
 	/* line-height: 23px; */
 }
 .startBtn {
@@ -89,7 +93,7 @@ ul li {
 
 .qlab {
 	text-align: left;
-	transform: translate(20%, -60%);
+	transform: translate(10%, -75%);
 	height: auto !important;
 }
 .qlanding {
@@ -170,6 +174,7 @@ ul li {
 		line-height: 4.8vw;
 		margin-left: 0 !important;
 		padding-left: 0px !important;
+		margin: 5% 0;
 	}
 	.qlanding {
 		margin-top: 6%;
