@@ -7,7 +7,7 @@ import Register from './Components/Register';
 import Error from './Components/Error';
 import Quiz from './Components/Quiz';
 import QuizPortal from './Components/QuizPortal';
-
+import Complete from './Components/Complete';
 initialize();
 function App() {
 	const [mail, updateMail] = useState('');
@@ -29,6 +29,9 @@ function App() {
 				</Route>
 				<Route path='/quiz'>
 					<Quiz updateAuth={updateAuth} />
+				</Route>
+				<Route path='/done'>
+					<Complete />
 				</Route>
 				<Route path='/quizportal'>
 					<QuizPortal auth={auth} />

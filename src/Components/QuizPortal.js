@@ -5,6 +5,8 @@ import { quizData } from '../data';
 import firebase from 'firebase';
 import { useHistory } from 'react-router-dom';
 import $ from 'jquery';
+import Loader from 'react-loader-spinner';
+
 // import img from '../assets/landingPhoto.svg';
 import img from '../assets/Hourglass.svg';
 const Quiz = ({ auth }) => {
@@ -74,6 +76,7 @@ const Quiz = ({ auth }) => {
 				// console.log(fd);
 				const formData = new FormData();
 				formData.append('file', pdf);
+				updateLoading(true);
 				$.ajax({
 					url: 'https://bubdup.robovitics.in/ans',
 					type: 'POST',
@@ -82,6 +85,11 @@ const Quiz = ({ auth }) => {
 					contentType: false,
 					success: function (data) {
 						console.log(data);
+						updateLoading(false);
+						history.push('/done');
+					},
+					error: () => {
+						alert('Upload Failed Contact your mentor');
 					},
 				});
 			}
@@ -102,42 +110,44 @@ const Quiz = ({ auth }) => {
 	};
 	// Upload =================================================================================================================================================================
 	const getfile = (e) => {
+		updateLoading(true);
 		console.log(e.target.files[0]);
 		updatepdf(e.target.files[0]);
 		updateFileName(e.target.files[0].name);
+		updateLoading(false);
 
 		updateTxt('Upload');
 	};
 	useEffect(() => {
-		// document.addEventListener('contextmenu', function (e) {
-		// 	e.preventDefault();
-		// });
-		// document.onkeydown = function (e) {
-		// 	if (e.keyCode == 123) {
-		// 		return false;
-		// 	}
-		// 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-		// 		return false;
-		// 	}
-		// 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-		// 		return false;
-		// 	}
-		// 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-		// 		return false;
-		// 	}
-		// 	if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-		// 		return false;
-		// 	}
-		// 	if (e.ctrlKey && e.shiftKey) {
-		// 		return false;
-		// 	}
-		// 	if (e.ctrlKey) {
-		// 		return false;
-		// 	}
-		// 	if (e.shiftKey) {
-		// 		return false;
-		// 	}
-		// };
+		document.addEventListener('contextmenu', function (e) {
+			e.preventDefault();
+		});
+		document.onkeydown = function (e) {
+			if (e.keyCode == 123) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+				return false;
+			}
+			if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey) {
+				return false;
+			}
+			if (e.ctrlKey) {
+				return false;
+			}
+			if (e.shiftKey) {
+				return false;
+			}
+		};
 		const uns = firebase.auth().onAuthStateChanged(async (user) => {
 			if (!user) {
 				history.push('/');
@@ -146,7 +156,6 @@ const Quiz = ({ auth }) => {
 					history.push('/quiz');
 				}
 				mail.current = user.email;
-				updateLoading(false);
 				console.log(mail);
 				const det = { email: mail.current };
 				console.log(det);
@@ -156,6 +165,7 @@ const Quiz = ({ auth }) => {
 					(data, err) => {
 						console.log(data);
 						updateQpaper(data);
+						updateLoading(false);
 					}
 				);
 				$.post(
@@ -174,21 +184,31 @@ const Quiz = ({ auth }) => {
 						currentTime.current = new Date(data.current + '.000Z');
 						console.log(edate);
 						console.log(cdate);
+						if (edate < cdate) {
+							console.log('time over');
+							updateSubmit(true);
+							stopTimerStartSubmit();
+						}
 						console.log(startTime);
 						// const dif = edate - cdate;
-						let dif = Math.abs(cdate - edate) / 1000;
-						console.log(dif, 'dif');
-						let days = Math.floor(dif / 86400);
-						dif -= days * 86400;
-						let hours = Math.floor(dif / 3600) % 24;
-						dif -= hours * 3600;
-						let minutes = Math.floor(dif / 60) % 60;
-						dif -= minutes * 60;
-						let seconds = dif % 60;
-						const sec = seconds;
-						const min = minutes;
-						console.log(sec, min, 'beep');
-						updateTime({ min: min, s: sec });
+						if (currentTime.current > startTime.current) {
+							history.push('/done');
+						}
+						if (submit) {
+							let dif = Math.abs(cdate - edate) / 1000;
+							console.log(dif, 'dif');
+							let days = Math.floor(dif / 86400);
+							dif -= days * 86400;
+							let hours = Math.floor(dif / 3600) % 24;
+							dif -= hours * 3600;
+							let minutes = Math.floor(dif / 60) % 60;
+							dif -= minutes * 60;
+							let seconds = dif % 60;
+							const sec = seconds;
+							const min = minutes;
+							console.log(sec, min, 'beep');
+							updateTime({ min: min, s: sec });
+						}
 						updateName(data.name);
 						updateRegno(data.regNo);
 					}
@@ -202,10 +222,11 @@ const Quiz = ({ auth }) => {
 
 	const stopTimerStartSubmit = () => {
 		console.log(submit);
+		console.log(startTime, 'START');
+		console.log(currentTime, 'current');
 		console.log(startTime);
-		console.log(currentTime);
-		let dif = Math.abs(startTime - currentTime) / 1000;
-		console.log(dif, 'dif');
+		let dif = Math.abs(startTime.current - currentTime.current) / 1000;
+		console.log(dif, 'didsf');
 		let days = Math.floor(dif / 86400);
 		dif -= days * 86400;
 		let hours = Math.floor(dif / 3600) % 24;
@@ -239,6 +260,8 @@ const Quiz = ({ auth }) => {
 							stopTimerStartSubmit();
 							clearInterval(myInterval);
 						} else {
+							clearInterval(myInterval);
+
 							history.push('/done');
 						}
 					} else {
@@ -280,9 +303,20 @@ const Quiz = ({ auth }) => {
 		<div
 			className='qp noselect'
 			onClick={(e) => {
-				// e.preventDefault();
+				e.preventDefault();
 			}}
 		>
+			{loading ? (
+				<div className='model'>
+					<Loader
+						type='BallTriangle'
+						color='#00BFFF'
+						height={100}
+						width={100}
+						className='aaa'
+					/>
+				</div>
+			) : null}
 			{/* {loading ? (
 				<p style={{ color: 'red', position: 'fixed' }}>loading</p>
 			) : null} */}
@@ -377,16 +411,16 @@ const Quiz = ({ auth }) => {
 														) : null}
 
 														{i.a ? (
-															<div>{`A  ${i.a}`}</div>
+															<div>{`A)  ${i.a}`}</div>
 														) : null}
 														{i.b ? (
-															<div>{`B  ${i.b}`}</div>
+															<div>{`B)  ${i.b}`}</div>
 														) : null}
 														{i.c ? (
-															<div>{`C  ${i.c}`}</div>
+															<div>{`C)  ${i.c}`}</div>
 														) : null}
 														{i.d ? (
-															<div>{`D  ${i.d}`}</div>
+															<div>{`D)  ${i.d}`}</div>
 														) : null}
 													</div>
 												</div>

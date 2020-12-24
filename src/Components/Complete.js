@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from "react";
-import svg from "../assets/landingPhoto.svg";
-import svg2 from "../assets/landingPhoto2.svg";
-import img from "../assets/tick.svg";
-import "./Styles/Complete.css";
-import help from "../assets/Help.svg";
+import { useEffect, useState, useRef } from 'react';
+import svg from '../assets/landingPhoto.svg';
+import svg2 from '../assets/landingPhoto2.svg';
+import img from '../assets/tick.svg';
+import './Styles/Complete.css';
+import help from '../assets/Help.svg';
 
 const Landing = () => {
 	const [width, setWidth] = useState(window.innerWidth);
@@ -16,19 +16,19 @@ const Landing = () => {
 
 	useEffect(() => {
 		const handleResize = () => setWidth(window.innerWidth);
-		window.addEventListener("resize", handleResize);
+		window.addEventListener('resize', handleResize);
 		return () => {
-			window.removeEventListener("resize", handleResize);
+			window.removeEventListener('resize', handleResize);
 		};
 	});
 	return (
-		<div className='landing' style={{ overflow: "none" }}>
+		<div className='landing' style={{ overflow: 'none' }}>
 			<div className='left'>
 				<div className='lav lleft'>
 					<div className='qwerty2'>
 						<img src={img} className='eiiimg' />
 						<div className='qwerty4'>
-							<span className='rc'>Registration Complete!</span>
+							<span className='rc'>Quiz Completed!</span>
 							<br></br>
 							<br></br>
 							<br></br>
@@ -52,10 +52,10 @@ const Landing = () => {
 					<br></br>
 					<img
 						src={help}
-						className={`${!helpp ? "helpimg" : "helpimg hell"}`}
+						className={`${!helpp ? 'helpimg' : 'helpimg hell'}`}
 					/>
 					<div
-						className={`${helpp ? "backdrop" : ""}`}
+						className={`${helpp ? 'backdrop' : ''}`}
 						onClick={() => updateHelp(false)}
 					></div>
 				</div>
