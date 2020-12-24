@@ -1,0 +1,270 @@
+.Rleft h1 {
+	color: white;
+	font-family: Roboto;
+	font-size: 5vw;
+	font-weight: 400;
+	z-index: 1000;
+	text-align: center;
+	margin-top: 10%;
+}
+.labb {
+	position: relative;
+	/* top: 50%; */
+	text-align: left;
+	transform: translate(25%, 0%);
+	height: 65vh;
+	width: 75%;
+	overflow: auto;
+	z-index: 1;
+}
+.Rleft {
+	width: 50vw;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	/* background-color: aliceblue; */
+	/* display: flex; */
+	justify-content: center;
+}
+form {
+	/* overflow: auto; */
+}
+.labb::-webkit-scrollbar {
+	width: 10px;
+	width: 5px;
+}
+
+/* Track */
+.labb::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+.labb::-webkit-scrollbar-thumb {
+	background: #c4c4c4;
+	height: 180px;
+	border-radius: 32px;
+}
+
+/* Handle on hover */
+.labb::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+/* ss */
+
+.formLabel {
+	/* width: 297px;
+	height: 49px; */
+	text-align: left;
+	font-family: Roboto;
+	font-weight: 500;
+	font-size: 1.8vw;
+	line-height: 2vw;
+	color: #ffffffff;
+	opacity: 1;
+}
+.input1 {
+	width: 32vw;
+	height: 56px;
+	padding: 5px;
+	font-size: 150%;
+	color: #ffffff;
+	margin: 20px 0;
+	font-family: Roboto;
+	background: #000000;
+	border: 3px solid #ffffff;
+	box-sizing: border-box;
+	border-radius: 6px;
+	outline: none;
+}
+.input1:focus {
+	border: 3px solid #0093ff;
+	/* display: none; */
+}
+.input3 {
+	background: black;
+	outline: none;
+	width: 32vw;
+	height: 200px;
+	padding: 15px;
+	font-size: 150%;
+	color: #ffffff;
+	margin: 20px 0;
+	font-family: Roboto;
+	border: 3px solid #ffffff;
+	box-sizing: border-box;
+	border-radius: 6px;
+}
+.input3:focus {
+	border-color: #0093ff;
+}
+.input3::-webkit-scrollbar {
+	width: 10px;
+	width: 4px;
+}
+
+/* Track */
+.input3::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+.input3::-webkit-scrollbar-thumb {
+	background: #c4c4c4;
+	height: 10px;
+	border-radius: 32px;
+}
+
+/* Handle on hover */
+.input3::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+.submitBtn {
+	width: 5vw;
+	cursor: pointer;
+}
+.bbb {
+	width: 15%;
+	background: black;
+	outline: none;
+	border: none;
+}
+.ermsg {
+	color: white;
+	/* margin-left: 20px; */
+	margin-bottom: 10px;
+	font-family: Roboto;
+}
+.er {
+	border-color: red;
+}
+.abc {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.asddd {
+	width: min-content;
+	height: auto;
+	height: 80vh;
+}
+.hell {
+	opacity: 1;
+}
+.ccs {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 3vw;
+	line-height: 3vw;
+	/* transform: translateX(-20%); */
+	display: inline-block;
+	color: #ffffff;
+	display: block;
+	text-align: right;
+	/* margin-top: 10%; */
+	position: absolute;
+	bottom: 10%;
+	/* float: right; */
+	width: 40%;
+}
+.right {
+	text-align: right;
+}
+.formLabel:after {
+	content: ' *';
+	color: red;
+}
+.labb h1,
+h2 {
+	display: none;
+}
+.Rleft h1 {
+	text-align: left;
+	transform: translateX(18%);
+}
+
+@media only screen and (max-width: 801px) {
+	.Rleft h1 {
+		display: none;
+	}
+	.labb h1,
+	h2 {
+		display: block;
+		color: white;
+		font-weight: 400;
+	}
+	.labb h1 {
+		text-align: left;
+		font-size: 15vw;
+		margin-top: 25%;
+		margin-bottom: 0;
+	}
+
+	.labb h2 {
+		font-family: Roboto;
+		font-size: 6vw;
+	}
+	form {
+		height: auto;
+	}
+	.labb {
+		height: auto;
+		display: block;
+		width: 90%;
+		margin: auto;
+		transform: translate(0%, 0%);
+	}
+	.abc {
+		text-align: center;
+		width: 100vw;
+		height: auto;
+	}
+	.input1,
+	.input3 {
+		width: 100%;
+		margin: 8px 0px;
+		font-size: 100%;
+	}
+	.formLabel {
+		align-items: center;
+		font-size: 6vw;
+		line-height: 6vw;
+		font-family: Roboto;
+		/* display: inline-block; */
+		margin: 0px;
+	}
+	.head2 {
+		font-size: 5vw;
+	}
+	.asddd {
+		width: 90%;
+	}
+	.ermsg {
+		display: block;
+		font-size: 3vw;
+		line-height: 3vw;
+		margin: 0px;
+	}
+	.Rleft {
+		height: min-content;
+		width: 90%;
+		text-align: center;
+		margin: auto;
+	}
+	.labb {
+		overflow: visible;
+	}
+	.ccs {
+		display: none;
+	}
+	.submitBtn {
+		width: 25vw;
+	}
+	.foto {
+		margin: 0;
+	}
+}

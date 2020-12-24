@@ -1,0 +1,245 @@
+.landing {
+	display: flex;
+}
+.left {
+	width: 50vw;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	/* background-color: aliceblue; */
+	/* display: flex; */
+	justify-content: center;
+}
+.right {
+	width: 50vw;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	/* display: flex; */
+	justify-content: center;
+}
+.roboLogo {
+	width: 56vw;
+	height: auto;
+	margin-left: -18%;
+}
+.lab {
+	position: relative;
+	top: 50%;
+	text-align: center;
+	transform: translate(25%, -70%);
+	/* transform: translateX(10%); */
+}
+.signinBtn {
+	display: flex;
+	align-items: center;
+	/* justify-content: space-between; */
+	justify-content: center;
+	width: 40%;
+	padding: 1.5vh 0.2vw;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 1.4vw;
+	color: white;
+	background-color: #0093ff;
+	border-radius: 20.1913px;
+	line-height: 20px;
+	transition: all 500ms;
+	cursor: pointer;
+}
+.signinBtn:hover {
+	/* background-color: #0095ffab; */
+	filter: brightness(1.25);
+	transition: all 500ms;
+}
+.signinBtn span {
+	width: 70%;
+}
+.vitE {
+	display: block;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 1.3vw;
+	color: #727272;
+	text-align: left;
+	margin-left: 1%;
+}
+.rab {
+	position: relative;
+	top: 50%;
+	transform: translate(0%, -58%);
+	text-align: right;
+}
+.foto {
+	width: 35vw;
+	transform: translateX(-20%);
+}
+.lccs {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 3vw;
+	line-height: 49px;
+	/* transform: translateX(-20%); */
+
+	color: #ffffff;
+	display: block;
+	text-align: center;
+	/* margin-top: 10%; */
+	position: absolute;
+	bottom: 18%;
+}
+button {
+	outline: none;
+}
+.helpStuff {
+	display: block;
+	position: fixed;
+	top: 5%;
+	right: 5%;
+	text-align: right;
+}
+.help {
+	color: white;
+	font-family: Raleway;
+	font-size: 1vw;
+	line-height: 1vw;
+	display: inline-block;
+	text-align: center;
+	padding: 4.5%;
+	padding-right: 3%;
+	border-radius: 20px;
+	transition: all 0.5s;
+	cursor: default;
+}
+.help:hover {
+	/* background-color: rgba(77, 219, 255, 1); */
+	/* color: black; */
+	transition: all 0.5s;
+}
+.helpimg {
+	display: inline;
+	opacity: 0;
+	/* height: 0; */
+	/* margin-right: 50%; */
+	transform: translateX(-5%);
+	transition: opacity 0.5s;
+}
+.help:hover ~ .helpimg {
+	/* transition: opacity 0.5s; */
+	height: auto;
+	opacity: 1;
+}
+.help:active ~ .helpimg {
+	/* transition: opacity 0.5s; */
+	height: auto;
+	opacity: 1;
+}
+.signinbtn {
+	position: relative;
+	width: 35%;
+	display: block;
+	margin-left: 0;
+	left: 0;
+	cursor: pointer;
+}
+.hell {
+	opacity: 1;
+}
+@media only screen and (max-width: 801px) {
+	.helpStuff {
+		/* top: 90%; */
+		position: relative;
+		margin-right: 3%;
+		margin-top: 3%;
+	}
+	.help {
+		font-size: 5vw;
+	}
+	.landing {
+		flex-direction: column;
+	}
+	.lccs {
+		display: none;
+	}
+	.right,
+	.left {
+		height: auto;
+		width: 90%;
+		text-align: center;
+		margin: auto;
+	}
+	.lab {
+		transform: translate(0%, 0%);
+		text-align: center;
+		justify-content: center;
+		margin: auto;
+	}
+	.roboLogo {
+		width: 80vw;
+		height: auto;
+		margin: 5% auto;
+	}
+	.signinBtn {
+		width: 70%;
+		font-size: 5vw;
+		margin: auto;
+		padding: 0.5vh 0.1vw;
+	}
+	.signinBtn img {
+		width: 15%;
+	}
+	.signinbtn {
+		margin: auto;
+		width: 70%;
+	}
+	.vitE {
+		width: 70%;
+		text-align: center;
+		margin: auto;
+		font-size: 4vw;
+	}
+	.rab {
+		transform: translate(0%, 0%);
+		text-align: center;
+		justify-content: center;
+		margin: auto;
+	}
+	.foto {
+		width: 88vw;
+		height: auto;
+		margin: auto;
+		position: relative;
+		left: 50%;
+		transform: translateX(-48%);
+	}
+	.fotoo {
+		/* transform: translate(-48%, 90%); */
+	}
+	.left {
+		margin-top: 40%;
+	}
+	.right {
+		transform: translate(0, 0);
+		margin-top: 15%;
+	}
+	.helpimg {
+		height: 0;
+	}
+	.help:hover ~ .helpimg {
+		height: auto;
+	}
+}
+
+.backdrop {
+	padding: 0;
+	margin: 0;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 00;
+	top: 0;
+	left: 0;
+}

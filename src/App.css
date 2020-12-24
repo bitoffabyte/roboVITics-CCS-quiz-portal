@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+html,
+body,
+#root {
+	width: 100vw;
+	height: 100vh;
+	margin: 0px;
+	padding: 0px;
+	background: rgba(0, 0, 0, 1);
+	/* overflow: hidden; */
+}
+.aaa {
+	position: fixed;
+	z-index: 10;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.model {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	background-color: rgba(0, 0, 0, 0.658);
+
+	z-index: 100;
+}

@@ -1,0 +1,381 @@
+import { useState, useEffect, useRef } from 'react';
+import './Styles/Quizportal.css';
+import d from '../assets/down.svg';
+import { quizData } from '../data';
+import firebase from 'firebase';
+import { useHistory } from 'react-router-dom';
+import $ from 'jquery';
+// import img from '../assets/landingPhoto.svg';
+import img from '../assets/Hourglass.svg';
+const Quiz = ({ auth }) => {
+	Date.prototype.addHours = function (h) {
+		this.setTime(this.getTime() + h * 60 * 60 * 1000);
+		return this;
+	};
+	const history = useHistory();
+	const [questions, updateQuestions] = useState('CSE');
+	const [drop, updateDrop] = useState(false);
+	const [loading, updateLoading] = useState(true);
+	const [name, updateName] = useState('');
+	const [regno, updateRegno] = useState('');
+
+	const [time, updateTime] = useState({ min: 0, s: 0 });
+	const [submit, updateSubmit] = useState(false);
+	const [timeOver, updateTimeOver] = useState(false);
+	const upload = useRef(null);
+	const [err1, updateErr1] = useState('');
+	const [err2, updateErr2] = useState('');
+
+	const [subtime, updateSubTime] = useState({
+		min: 0,
+		s: 0,
+	});
+	const [testOver, updateTestOver] = useState(false);
+	const subjects = ['Logic', 'CSE', 'Mechanical', 'Electrical', 'Management'];
+	const [qpaper, updateQpaper] = useState({
+		logic: [],
+		cse: [],
+		mech: [],
+		elec: [],
+		mgmt: [],
+	});
+	const qname = {
+		Logic: 'logic',
+		CSE: 'cse',
+		Mechanical: 'mech',
+		Electrical: 'elec',
+		Management: 'mgmt',
+	};
+	const [txt, updateTxt] = useState('Select File');
+	const mail = useRef('Name Lastname');
+	const [pdf, updatepdf] = useState(null);
+	const [fileName, updateFileName] = useState('');
+	const startTime = useRef(null);
+	const currentTime = useRef(null);
+
+	// Upload Button Click =================================================================================================================================================================
+	const uploadBtnClick = () => {
+		if (txt === 'Select File') {
+			console.log('asd');
+			upload.current.click();
+		} else if (txt === 'Upload') {
+			let s =
+				regno.toUpperCase() +
+				'_' +
+				name.replace(' ', '_').toUpperCase() +
+				'.pdf';
+			// console.log(pdf.name.toUpperCase() == s);
+			if (
+				pdf.name.toUpperCase() == s.toUpperCase() &&
+				pdf.size / 1000000 <= 5
+			) {
+				// var fd = new FormData();
+				// fd.append(pdf);
+				// console.log(fd);
+				const formData = new FormData();
+
+				const det = {
+					file: pdf,
+				};
+				$.post('https://bubdup.robovitics.in/ans', det, (data, err) => {
+					console.log(data);
+					updateQpaper(data);
+				});
+			}
+			console.log(s);
+			console.log(pdf.name.toUpperCase());
+			if (pdf.type != 'application/pdf') {
+				updateTxt('Select File');
+			}
+			if (pdf.name.toUpperCase() != s.toUpperCase()) {
+				updateErr1('Please name the file as ' + s);
+				updateTxt('Select File');
+			}
+			if (pdf.size / 1000000 > 5) {
+				updateErr1('Please keep the file below 5 mb');
+				updateTxt('Select File');
+			}
+		}
+	};
+	// Upload =================================================================================================================================================================
+	const getfile = (e) => {
+		console.log(e.target.files[0]);
+		updatepdf(e.target.files[0]);
+		updateFileName(e.target.files[0].name);
+
+		updateTxt('Upload');
+	};
+	useEffect(() => {
+		const uns = firebase.auth().onAuthStateChanged(async (user) => {
+			if (!user) {
+				history.push('/');
+			} else {
+				if (!auth) {
+					history.push('/quiz');
+				}
+				mail.current = user.email;
+				updateLoading(false);
+				console.log(mail);
+				const det = { email: mail.current };
+				console.log(det);
+				$.post(
+					'https://bubdup.robovitics.in/questions',
+					det,
+					(data, err) => {
+						console.log(data);
+						updateQpaper(data);
+					}
+				);
+				$.post(
+					'https://bubdup.robovitics.in/qdata',
+					det,
+					(data, err) => {
+						// 60 min => 3600000
+						console.log(data, 'data');
+						console.log(err, 'err');
+						const edate = new Date(data.start + '.000Z');
+						const cdate = new Date(data.current + '.000Z');
+						console.log(edate);
+						edate.addHours(1);
+						startTime.current = new Date(data.start + '.000Z');
+						startTime.current.addHours(1.25);
+						currentTime.current = new Date(data.current + '.000Z');
+						console.log(edate);
+						console.log(cdate);
+						console.log(startTime);
+						// const dif = edate - cdate;
+						let dif = Math.abs(cdate - edate) / 1000;
+						dif = 5;
+						console.log(dif, 'dif');
+						let days = Math.floor(dif / 86400);
+						dif -= days * 86400;
+						let hours = Math.floor(dif / 3600) % 24;
+						dif -= hours * 3600;
+						let minutes = Math.floor(dif / 60) % 60;
+						dif -= minutes * 60;
+						let seconds = dif % 60;
+						const sec = seconds;
+						const min = minutes;
+						console.log(sec, min, 'beep');
+						updateTime({ min: min, s: sec });
+						updateName(data.name);
+						updateRegno(data.regNo);
+					}
+				);
+			}
+		});
+		return () => {
+			uns();
+		};
+	}, []);
+
+	const stopTimerStartSubmit = () => {
+		console.log(submit);
+		console.log(startTime);
+		console.log(currentTime);
+		let dif = Math.abs(startTime - currentTime) / 1000;
+		dif = 10;
+		console.log(dif, 'dif');
+		let days = Math.floor(dif / 86400);
+		dif -= days * 86400;
+		let hours = Math.floor(dif / 3600) % 24;
+		dif -= hours * 3600;
+		let minutes = Math.floor(dif / 60) % 60;
+		dif -= minutes * 60;
+		let seconds = dif % 60;
+		const sec = seconds;
+		const min = minutes;
+		updateTime({ s: sec, min: min });
+		console.log(subtime, 'lll');
+		updateSubmit(true);
+	};
+
+	// TIMER =================================================================================================================================================================
+	// useEffect(() => {
+	// 	let myInterval = setInterval(() => {
+	// 		{
+	// 			if (time.s > 0) {
+	// 				// console.log('beep');
+	// 				updateTime({ ...time, s: Math.floor(time.s - 1) });
+	// 				currentTime.current.setTime(
+	// 					currentTime.current.getTime() + 1000
+	// 				);
+	// 			}
+	// 			if (time.s === 0) {
+	// 				// console.log('beep');
+
+	// 				if (time.min === 0) {
+	// 					if (!submit) {
+	// 						stopTimerStartSubmit();
+	// 						clearInterval(myInterval);
+	// 					} else {
+	// 						history.push('/done');
+	// 					}
+	// 				} else {
+	// 					console.log('asds');
+	// 					console.log(time);
+	// 					updateTime((prev) => ({
+	// 						min: prev.min - 1,
+	// 						s: 59,
+	// 					}));
+	// 					currentTime.current.setTime(
+	// 						currentTime.current.getTime() + 1000
+	// 					);
+	// 				}
+	// 			}
+	// 		}
+	// 	}, 1000);
+	// 	return () => {
+	// 		clearInterval(myInterval);
+	// 	};
+	// });
+	// TIMER DISPLAY =================================================================================================================================================================
+	const dispTime = () => {
+		let s = '';
+		if (time.min.toString().length < 2) {
+			s = '0' + Math.floor(time.min);
+		} else {
+			s = Math.floor(time.min);
+		}
+		s += ':';
+		if (time.s.toString().length < 2) {
+			s += '0' + Math.floor(time.s);
+		} else {
+			s += Math.floor(time.s);
+		}
+		return s;
+	};
+
+	return (
+		<div className='qp'>
+			{/* {loading ? (
+				<p style={{ color: 'red', position: 'fixed' }}>loading</p>
+			) : null} */}
+			<div className='topp'>
+				<div className='timer'>
+					<img src={img} className='hr' />
+					{dispTime()}
+				</div>
+				<div className='nln'>
+					{name}
+					<br />
+					<button className='uploadBtn' onClick={uploadBtnClick}>
+						{txt}
+					</button>
+					<br />
+					<span className='nameOfFile'>{fileName}</span>
+					<br />
+					<span className='err1'>{err1}</span>
+					<span className='err2'>{err2}</span>
+
+					<input
+						type='file'
+						ref={upload}
+						style={{ display: 'none' }}
+						onChange={(e) => getfile(e)}
+					/>
+				</div>
+			</div>
+			<div className='quizBody'>
+				{!submit ? (
+					<>
+						<div className='buttons'>
+							{subjects.map((i) => (
+								<button
+									key={i}
+									onClick={() => updateQuestions(i)}
+									className={`${
+										questions === i ? 'active' : 'btn'
+									}`}
+								>
+									{i}
+								</button>
+							))}
+						</div>
+						<div className='dropdown'>
+							<div
+								className='dropdown-1'
+								onClick={() => updateDrop((prev) => !prev)}
+							>
+								{questions}
+								<img src={d} />
+							</div>
+							{drop ? (
+								<div
+									className={`${
+										drop ? 'items itemss' : 'items itemsso'
+									}`}
+								>
+									{subjects.map((i) => (
+										<p
+											key={i}
+											onClick={() => {
+												updateDrop(false);
+												updateQuestions(i);
+											}}
+										>
+											{i}
+										</p>
+									))}
+								</div>
+							) : null}
+						</div>
+					</>
+				) : null}
+				{!submit ? (
+					<div className='portal'>
+						<div className='paper'>
+							{qpaper[qname[questions]]
+								? qpaper[qname[questions]].map((i, index) => {
+										return (
+											<div className='qs'>
+												<div className='qpp'>
+													<div className='qno'>
+														{index + 1}
+													</div>
+													<div className='q'>
+														<div className='qesb'>
+															{i.q}
+														</div>
+														{i.i ? (
+															<img src={img} />
+														) : null}
+
+														{i.a ? (
+															<div>{`A  ${i.a}`}</div>
+														) : null}
+														{i.b ? (
+															<div>{`B  ${i.b}`}</div>
+														) : null}
+														{i.c ? (
+															<div>{`C  ${i.c}`}</div>
+														) : null}
+														{i.d ? (
+															<div>{`D  ${i.d}`}</div>
+														) : null}
+													</div>
+												</div>
+											</div>
+										);
+								  })
+								: null}
+						</div>
+					</div>
+				) : (
+					<h1
+						style={{
+							position: 'fixed',
+							top: '50%',
+							left: '50%',
+							transform: 'translate(-50%,-50%)',
+						}}
+					>
+						Please submit before timer runs out
+					</h1>
+				)}
+			</div>
+		</div>
+	);
+};
+
+export default Quiz;
