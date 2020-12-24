@@ -73,13 +73,16 @@ const Quiz = ({ auth }) => {
 				// fd.append(pdf);
 				// console.log(fd);
 				const formData = new FormData();
-
-				const det = {
-					file: pdf,
-				};
-				$.post('https://bubdup.robovitics.in/ans', det, (data, err) => {
-					console.log(data);
-					updateQpaper(data);
+				formData.append('file', pdf);
+				$.ajax({
+					url: 'https://bubdup.robovitics.in/ans',
+					type: 'POST',
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (data) {
+						console.log(data);
+					},
 				});
 			}
 			console.log(s);
@@ -106,6 +109,35 @@ const Quiz = ({ auth }) => {
 		updateTxt('Upload');
 	};
 	useEffect(() => {
+		document.addEventListener('contextmenu', function (e) {
+			e.preventDefault();
+		});
+		document.onkeydown = function (e) {
+			// if (e.keyCode == 123) {
+			// 	return false;
+			// }
+			// if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+			// 	return false;
+			// }
+			// if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+			// 	return false;
+			// }
+			// if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+			// 	return false;
+			// }
+			// if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+			// 	return false;
+			// }
+			// if (e.ctrlKey && e.shiftKey) {
+			// 	return false;
+			// }
+			// if (e.ctrlKey) {
+			// 	return false;
+			// }
+			// if (e.shiftKey) {
+			// 	return false;
+			// }
+		};
 		const uns = firebase.auth().onAuthStateChanged(async (user) => {
 			if (!user) {
 				history.push('/');
@@ -145,7 +177,6 @@ const Quiz = ({ auth }) => {
 						console.log(startTime);
 						// const dif = edate - cdate;
 						let dif = Math.abs(cdate - edate) / 1000;
-						dif = 5;
 						console.log(dif, 'dif');
 						let days = Math.floor(dif / 86400);
 						dif -= days * 86400;
@@ -174,7 +205,6 @@ const Quiz = ({ auth }) => {
 		console.log(startTime);
 		console.log(currentTime);
 		let dif = Math.abs(startTime - currentTime) / 1000;
-		dif = 10;
 		console.log(dif, 'dif');
 		let days = Math.floor(dif / 86400);
 		dif -= days * 86400;
@@ -191,44 +221,44 @@ const Quiz = ({ auth }) => {
 	};
 
 	// TIMER =================================================================================================================================================================
-	// useEffect(() => {
-	// 	let myInterval = setInterval(() => {
-	// 		{
-	// 			if (time.s > 0) {
-	// 				// console.log('beep');
-	// 				updateTime({ ...time, s: Math.floor(time.s - 1) });
-	// 				currentTime.current.setTime(
-	// 					currentTime.current.getTime() + 1000
-	// 				);
-	// 			}
-	// 			if (time.s === 0) {
-	// 				// console.log('beep');
+	useEffect(() => {
+		let myInterval = setInterval(() => {
+			{
+				if (time.s > 0) {
+					// console.log('beep');
+					updateTime({ ...time, s: Math.floor(time.s - 1) });
+					currentTime.current.setTime(
+						currentTime.current.getTime() + 1000
+					);
+				}
+				if (time.s === 0) {
+					// console.log('beep');
 
-	// 				if (time.min === 0) {
-	// 					if (!submit) {
-	// 						stopTimerStartSubmit();
-	// 						clearInterval(myInterval);
-	// 					} else {
-	// 						history.push('/done');
-	// 					}
-	// 				} else {
-	// 					console.log('asds');
-	// 					console.log(time);
-	// 					updateTime((prev) => ({
-	// 						min: prev.min - 1,
-	// 						s: 59,
-	// 					}));
-	// 					currentTime.current.setTime(
-	// 						currentTime.current.getTime() + 1000
-	// 					);
-	// 				}
-	// 			}
-	// 		}
-	// 	}, 1000);
-	// 	return () => {
-	// 		clearInterval(myInterval);
-	// 	};
-	// });
+					if (time.min === 0) {
+						if (!submit) {
+							stopTimerStartSubmit();
+							clearInterval(myInterval);
+						} else {
+							history.push('/done');
+						}
+					} else {
+						console.log('asds');
+						console.log(time);
+						updateTime((prev) => ({
+							min: prev.min - 1,
+							s: 59,
+						}));
+						currentTime.current.setTime(
+							currentTime.current.getTime() + 1000
+						);
+					}
+				}
+			}
+		}, 1000);
+		return () => {
+			clearInterval(myInterval);
+		};
+	});
 	// TIMER DISPLAY =================================================================================================================================================================
 	const dispTime = () => {
 		let s = '';
@@ -247,7 +277,12 @@ const Quiz = ({ auth }) => {
 	};
 
 	return (
-		<div className='qp'>
+		<div
+			className='qp noselect'
+			// onClick={(e) => {
+			// 	e.preventDefault();
+			// }}
+		>
 			{/* {loading ? (
 				<p style={{ color: 'red', position: 'fixed' }}>loading</p>
 			) : null} */}
@@ -331,7 +366,7 @@ const Quiz = ({ auth }) => {
 											<div className='qs'>
 												<div className='qpp'>
 													<div className='qno'>
-														{index + 1}
+														{index + 1}.
 													</div>
 													<div className='q'>
 														<div className='qesb'>
