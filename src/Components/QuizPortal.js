@@ -7,6 +7,14 @@ import { useHistory } from 'react-router-dom';
 import $ from 'jquery';
 import Loader from 'react-loader-spinner';
 
+// import img2e from '../img/img2e.png';
+// import img4m from '../img/img4m.jpeg';
+// import img9e from '../img/img9e.png';
+// import img22e from '../img/img22e.jpg';
+// import img25e from '../img/img25e.png';
+// import img27l from '../img/img27l.png';
+// import img30e from '../img/img30e.png';
+import imgs from '../images-handler';
 // import img from '../assets/landingPhoto.svg';
 import img from '../assets/Hourglass.svg';
 const Quiz = ({ auth }) => {
@@ -108,6 +116,7 @@ const Quiz = ({ auth }) => {
 			}
 		}
 	};
+
 	// Upload =================================================================================================================================================================
 	const getfile = (e) => {
 		updateLoading(true);
@@ -406,9 +415,9 @@ const Quiz = ({ auth }) => {
 														<div className='qesb'>
 															{i.q}
 														</div>
-														{i.i ? (
-															<img src={img} />
-														) : null}
+														{i.i != ''
+															? imgs(i.i)
+															: null}
 
 														{i.a ? (
 															<div>{`A)  ${i.a}`}</div>

@@ -301,4 +301,7 @@
 		transform: translateY(30%);
 		width: 8vw;
 	}
+	.qimg {
+		width: 100%;
+	}
 }
