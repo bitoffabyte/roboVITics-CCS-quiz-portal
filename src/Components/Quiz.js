@@ -37,7 +37,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 	];
 	const handleClick = () => {
 		updateLoading(true);
-		if (pass === '') {
+		if (pass === 'qwerty') {
 			updateEr(false);
 			updateAuth(true);
 			const det = { email: mail.current };
