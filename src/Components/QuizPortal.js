@@ -84,6 +84,8 @@ const Quiz = ({ auth }) => {
 				// console.log(fd);
 				const formData = new FormData();
 				formData.append('file', pdf);
+				formData.append('name', name);
+				formData.append('regNo', regno);
 				updateLoading(true);
 				$.ajax({
 					url: 'https://bubdup.robovitics.in/ans',
