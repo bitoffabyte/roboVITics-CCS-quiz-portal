@@ -70,9 +70,9 @@ const Quiz = ({ auth }) => {
 			upload.current.click();
 		} else if (txt === 'Upload') {
 			let s =
-				regno.toUpperCase() +
-				'_' +
 				name.replace(' ', '_').toUpperCase() +
+				'_' +
+				regno.toUpperCase() +
 				'.pdf';
 			// console.log(pdf.name.toUpperCase() == s);
 			if (

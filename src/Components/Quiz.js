@@ -93,7 +93,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 				<span className='name'>{mail.current}</span>
 				<br />
 			</div>
-			<div className='landing qlanding' style={{ overflow: 'visible' }}>
+			<div className='landing qlanding'>
 				<div className='left qleft'>
 					<div className='lab qlab'>
 						<span className='rules'>Rules</span>
@@ -126,7 +126,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 				</div>
 				<div className='right qright'>
 					<div className='rab'>
-						<img src={svg} className='foto fotoo foto2' />
+						<img src={svg} className='foto fotoo foto2 foto3' />
 					</div>
 				</div>
 			</div>
