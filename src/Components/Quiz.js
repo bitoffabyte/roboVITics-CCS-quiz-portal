@@ -45,8 +45,8 @@ const Landing = ({ updateMail, updateAuth }) => {
 				'https://bubdup.robovitics.in/setstart',
 				det,
 				(data, err) => {
-					console.log(data, 'data');
-					console.log(err, 'err');
+					// console.log(data, 'data');
+					// console.log(err, 'err');
 					updateLoading(false);
 					history.push('/quizportal');
 				}
@@ -68,7 +68,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 			} else {
 				mail.current = user.email;
 				updateLoading(false);
-				console.log(mail);
+				// console.log(mail);
 			}
 		});
 		return () => {
