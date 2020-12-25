@@ -38,7 +38,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 	];
 	const handleClick = () => {
 		updateLoading(true);
-		if (pass === 'qwerty') {
+		if (pass == 'O@t4F^s8N!)') {
 			const det = { email: mail.current };
 
 			$.post(
@@ -48,7 +48,6 @@ const Landing = ({ updateMail, updateAuth }) => {
 					console.log(data, 'data');
 					console.log(err, 'err');
 					updateLoading(false);
-
 					history.push('/quizportal');
 				}
 			);

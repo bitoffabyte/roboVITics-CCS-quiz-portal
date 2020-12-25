@@ -55,6 +55,7 @@ const Landing = ({ updateMail }) => {
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
+
 	return (
 		<div className='landing' style={{ overflow: 'auto' }}>
 			{loading ? (
