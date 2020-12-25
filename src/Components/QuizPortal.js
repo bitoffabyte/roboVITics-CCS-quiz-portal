@@ -66,7 +66,6 @@ const Quiz = ({ auth }) => {
 	// Upload Button Click =================================================================================================================================================================
 	const uploadBtnClick = () => {
 		if (txt === 'Select File') {
-			//console.log('asd');
 			upload.current.click();
 		} else if (txt === 'Upload') {
 			let s =
@@ -74,7 +73,6 @@ const Quiz = ({ auth }) => {
 				'_' +
 				regno.toUpperCase() +
 				'.pdf';
-			// //console.log(pdf.name.toUpperCase() == s);
 			if (
 				pdf.name.toUpperCase() == s.toUpperCase() &&
 				pdf.size / 1000000 <= 5
@@ -91,18 +89,15 @@ const Quiz = ({ auth }) => {
 					processData: false,
 					contentType: false,
 					success: function (data) {
-						//console.log(data);
 						updateLoading(false);
 						history.push('/done');
 					},
 					error: () => {
-						//console.log('fail');
 						alert('Upload Failed Contact your mentor');
 					},
 				});
 			}
-			//console.log(s);
-			//console.log(pdf.name.toUpperCase());
+
 			if (pdf.type != 'application/pdf') {
 				updateTxt('Select File');
 			}
@@ -116,15 +111,12 @@ const Quiz = ({ auth }) => {
 			}
 		}
 	};
-
 	// Upload =================================================================================================================================================================
 	const getfile = (e) => {
 		updateLoading(true);
-		//console.log(e.target.files[0]);
 		updatepdf(e.target.files[0]);
 		updateFileName(e.target.files[0].name);
 		updateLoading(false);
-
 		updateTxt('Upload');
 	};
 	useEffect(() => {
@@ -165,14 +157,11 @@ const Quiz = ({ auth }) => {
 					history.push('/quiz');
 				}
 				mail.current = user.email;
-				//console.log(mail);
 				const det = { email: mail.current };
-				//console.log(det);
 				$.post(
 					'https://bubdup.robovitics.in/questions',
 					det,
 					(data, err) => {
-						//console.log(data);
 						updateQpaper(data);
 						updateLoading(false);
 					}
@@ -181,34 +170,27 @@ const Quiz = ({ auth }) => {
 					'https://bubdup.robovitics.in/qdata',
 					det,
 					(data, err) => {
-						// 60 min => 3600000
-						//console.log(data, 'data');
-						//console.log(err, 'err');
+						// console.log(data == 'No record');
+
 						const edate = new Date(data.start + '.000Z');
 						const cdate = new Date(data.current + '.000Z');
-						//console.log(edate);
 						edate.addHours(1);
 						startTime.current = new Date(data.start + '.000Z');
 						startTime.current.addHours(1.25);
 						currentTime.current = new Date(data.current + '.000Z');
-						//console.log(edate);
-						//console.log(cdate);
 						if (edate < cdate) {
-							//console.log('llklkccc');
-							//console.log('time over');
 							updateSubmit(true);
 							stopTimerStartSubmit();
 						}
-						//console.log(startTime);
-						// const dif = edate - cdate;
 						if (currentTime.current > startTime.current) {
+							console.log(currentTime);
+							console.log(startTime);
 							history.push('/done');
 						}
 						let sec = 0;
 						let min = 0;
 						if (!submit) {
 							let dif = Math.abs(cdate - edate) / 1000;
-							//console.log(dif, 'dif');
 							let days = Math.floor(dif / 86400);
 							dif -= days * 86400;
 							let hours = Math.floor(dif / 3600) % 24;
@@ -218,7 +200,6 @@ const Quiz = ({ auth }) => {
 							let seconds = dif % 60;
 							sec = seconds;
 							min = minutes;
-							//console.log(sec, min, 'beep');
 							updateTime({ min: min, s: sec });
 						}
 						updateName(data.name);
@@ -229,16 +210,12 @@ const Quiz = ({ auth }) => {
 		});
 		return () => {
 			uns();
+			document.onkeydown = () => {};
 		};
 	}, []);
 
 	const stopTimerStartSubmit = () => {
-		//console.log(submit);
-		//console.log(startTime, 'START');
-		//console.log(currentTime, 'current');
-		//console.log(startTime);
 		let dif = Math.abs(startTime.current - currentTime.current) / 1000;
-		//console.log(dif, 'didsf');
 		let days = Math.floor(dif / 86400);
 		dif -= days * 86400;
 		let hours = Math.floor(dif / 3600) % 24;
@@ -249,37 +226,28 @@ const Quiz = ({ auth }) => {
 		const sec = seconds;
 		const min = minutes;
 		updateTime({ s: sec, min: min });
-		//console.log(subtime, 'lll');
-		//console.log('llklks');
 		updateSubmit(true);
 	};
-
 	// TIMER =================================================================================================================================================================
 	useEffect(() => {
 		let myInterval = setInterval(() => {
 			{
 				if (time.s > 0) {
-					// //console.log('beep');
 					updateTime({ ...time, s: Math.floor(time.s - 1) });
 					currentTime.current.setTime(
 						currentTime.current.getTime() + 1000
 					);
 				}
 				if (time.s === 0) {
-					// //console.log('beep');
-
 					if (time.min === 0) {
 						if (!submit) {
 							stopTimerStartSubmit();
 							clearInterval(myInterval);
 						} else {
 							clearInterval(myInterval);
-
 							history.push('/done');
 						}
 					} else {
-						//console.log('asds');
-						//console.log(time);
 						updateTime((prev) => ({
 							min: prev.min - 1,
 							s: 59,
@@ -311,7 +279,6 @@ const Quiz = ({ auth }) => {
 		}
 		return s;
 	};
-
 	return (
 		<div
 			className='qp noselect'
