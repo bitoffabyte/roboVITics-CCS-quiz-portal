@@ -312,7 +312,7 @@ const Quiz = ({ auth }) => {
 		<div
 			className='qp noselect'
 			onClick={(e) => {
-				e.preventDefault();
+				// e.preventDefault();
 			}}
 		>
 			{loading ? (
