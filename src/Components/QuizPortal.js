@@ -128,35 +128,35 @@ const Quiz = ({ auth }) => {
 		updateTxt('Upload');
 	};
 	useEffect(() => {
-		document.addEventListener('contextmenu', function (e) {
-			e.preventDefault();
-		});
-		document.onkeydown = function (e) {
-			if (e.keyCode == 123) {
-				return false;
-			}
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-				return false;
-			}
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-				return false;
-			}
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-				return false;
-			}
-			if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-				return false;
-			}
-			if (e.ctrlKey && e.shiftKey) {
-				return false;
-			}
-			if (e.ctrlKey) {
-				return false;
-			}
-			if (e.shiftKey) {
-				return false;
-			}
-		};
+		// document.addEventListener('contextmenu', function (e) {
+		// 	e.preventDefault();
+		// });
+		// // document.onkeydown = function (e) {
+		// // 	if (e.keyCode == 123) {
+		// // 		return false;
+		// // 	}
+		// // 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+		// // 		return false;
+		// // 	}
+		// // 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+		// // 		return false;
+		// // 	}
+		// // 	if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+		// // 		return false;
+		// // 	}
+		// // 	if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+		// // 		return false;
+		// // 	}
+		// // 	if (e.ctrlKey && e.shiftKey) {
+		// // 		return false;
+		// // 	}
+		// // 	if (e.ctrlKey) {
+		// // 		return false;
+		// // 	}
+		// // 	if (e.shiftKey) {
+		// // 		return false;
+		// // 	}
+		// };
 		const uns = firebase.auth().onAuthStateChanged(async (user) => {
 			if (!user) {
 				history.push('/');
@@ -194,6 +194,7 @@ const Quiz = ({ auth }) => {
 						console.log(edate);
 						console.log(cdate);
 						if (edate < cdate) {
+							console.log('llklkccc');
 							console.log('time over');
 							updateSubmit(true);
 							stopTimerStartSubmit();
@@ -203,7 +204,9 @@ const Quiz = ({ auth }) => {
 						if (currentTime.current > startTime.current) {
 							history.push('/done');
 						}
-						if (submit) {
+						let sec = 0;
+						let min = 0;
+						if (!submit) {
 							let dif = Math.abs(cdate - edate) / 1000;
 							console.log(dif, 'dif');
 							let days = Math.floor(dif / 86400);
@@ -213,8 +216,8 @@ const Quiz = ({ auth }) => {
 							let minutes = Math.floor(dif / 60) % 60;
 							dif -= minutes * 60;
 							let seconds = dif % 60;
-							const sec = seconds;
-							const min = minutes;
+							sec = seconds;
+							min = minutes;
 							console.log(sec, min, 'beep');
 							updateTime({ min: min, s: sec });
 						}
@@ -247,6 +250,8 @@ const Quiz = ({ auth }) => {
 		const min = minutes;
 		updateTime({ s: sec, min: min });
 		console.log(subtime, 'lll');
+		console.log('llklks');
+
 		updateSubmit(true);
 	};
 
