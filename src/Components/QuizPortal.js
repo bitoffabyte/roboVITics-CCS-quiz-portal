@@ -79,9 +79,6 @@ const Quiz = ({ auth }) => {
 				pdf.name.toUpperCase() == s.toUpperCase() &&
 				pdf.size / 1000000 <= 5
 			) {
-				// var fd = new FormData();
-				// fd.append(pdf);
-				// console.log(fd);
 				const formData = new FormData();
 				formData.append('file', pdf);
 				formData.append('name', name);
@@ -99,6 +96,7 @@ const Quiz = ({ auth }) => {
 						history.push('/done');
 					},
 					error: () => {
+						console.log('fail');
 						alert('Upload Failed Contact your mentor');
 					},
 				});
@@ -253,7 +251,6 @@ const Quiz = ({ auth }) => {
 		updateTime({ s: sec, min: min });
 		console.log(subtime, 'lll');
 		console.log('llklks');
-
 		updateSubmit(true);
 	};
 
