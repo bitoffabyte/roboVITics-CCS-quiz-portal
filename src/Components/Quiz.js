@@ -33,14 +33,14 @@ const Landing = ({ updateMail, updateAuth }) => {
 		'In case, any issues are faced while attempting the exam, the assigned mentor only should be contacted.',
 		'There are multiple sections in the test. It is mandatory to attempt the Management and logical reasoning sections and at least one of the three technical sections provided (CSE, Electrical , Mechanical). You can attempt multiple sections.',
 		'For MCQs, write down the option as well as the answer clearly [ex: b) python].',
-		'Answers should be written on paper only, scanned (as a pdf)  and uploaded with the name of the file in the following format: RegistrationNumber_FirstName_LastName.pdf.',
+		'Answers should be written on paper only, scanned (as a pdf)  and uploaded with the name of the file in the following format: FirstName_LastName_RegistrationNumber.pdf.',
+		'If file upload is not working, contact your mentor within the 15 min upload time',
 	];
 	const handleClick = () => {
 		updateLoading(true);
 		if (pass === 'qwerty') {
-			updateEr(false);
-			updateAuth(true);
 			const det = { email: mail.current };
+
 			$.post(
 				'https://bubdup.robovitics.in/setstart',
 				det,
@@ -52,6 +52,8 @@ const Landing = ({ updateMail, updateAuth }) => {
 					history.push('/quizportal');
 				}
 			);
+			updateEr(false);
+			updateAuth(true);
 		} else {
 			updateEr(true);
 			updateLoading(false);
@@ -91,7 +93,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 				<span className='name'>{mail.current}</span>
 				<br />
 			</div>
-			<div className='landing qlanding' style={{ overflow: 'visible' }}>
+			<div className='landing qlanding'>
 				<div className='left qleft'>
 					<div className='lab qlab'>
 						<span className='rules'>Rules</span>
@@ -124,7 +126,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 				</div>
 				<div className='right qright'>
 					<div className='rab'>
-						<img src={svg} className='foto fotoo foto2' />
+						<img src={svg} className='foto fotoo foto2 foto3' />
 					</div>
 				</div>
 			</div>

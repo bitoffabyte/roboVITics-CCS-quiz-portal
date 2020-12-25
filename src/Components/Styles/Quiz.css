@@ -1,6 +1,6 @@
 .head {
 	padding-top: 7%;
-	padding-right: 5%;
+	padding-right: 3%;
 	padding-bottom: 2%;
 	color: white;
 	text-align: right;
@@ -12,6 +12,12 @@
 	font-weight: 400;
 	font-size: 2.5vw;
 }
+.asddsaaa {
+	width: 100vw;
+}
+.qlanding {
+	overflow-x: none;
+}
 .email,
 .roll {
 	font-size: 1.5vw;
@@ -22,7 +28,6 @@
 .qright {
 	height: auto;
 }
-
 .bod {
 	font-family: Roboto;
 	display: flex;
@@ -52,11 +57,12 @@
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 28px;
+	font-size: 1vw;
 	color: #808080;
 }
 ul {
 	width: 85%;
+	margin-right: 0px;
 }
 ul li {
 	color: #c4c4c4;
@@ -64,7 +70,7 @@ ul li {
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 1vw;
+	font-size: 0.9vw;
 	line-height: 1.2vw;
 	margin: 2% 0;
 
@@ -93,7 +99,7 @@ ul li {
 
 .qlab {
 	text-align: left;
-	transform: translate(10%, -75%);
+	transform: translate(10%, -85%);
 	height: auto !important;
 }
 .qlanding {
@@ -125,6 +131,7 @@ ul li {
 	font-family: Roboto;
 	margin-top: 2%;
 	color: red;
+	font-size: 1vw;
 }
 @media only screen and (max-width: 801px) {
 	.bod {
@@ -207,4 +214,7 @@ ul li {
 	.foto2 {
 		transform: translateX(-15%);
 	}
+}
+ul {
+	margin-right: 0px !important;
 }

@@ -70,9 +70,9 @@ const Quiz = ({ auth }) => {
 			upload.current.click();
 		} else if (txt === 'Upload') {
 			let s =
-				regno.toUpperCase() +
-				'_' +
 				name.replace(' ', '_').toUpperCase() +
+				'_' +
+				regno.toUpperCase() +
 				'.pdf';
 			// console.log(pdf.name.toUpperCase() == s);
 			if (
@@ -84,6 +84,8 @@ const Quiz = ({ auth }) => {
 				// console.log(fd);
 				const formData = new FormData();
 				formData.append('file', pdf);
+				formData.append('name', name);
+				formData.append('regNo', regno);
 				updateLoading(true);
 				$.ajax({
 					url: 'https://bubdup.robovitics.in/ans',
