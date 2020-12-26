@@ -183,8 +183,8 @@ const Quiz = ({ auth }) => {
 							stopTimerStartSubmit();
 						}
 						if (currentTime.current > startTime.current) {
-							console.log(currentTime);
-							console.log(startTime);
+							// console.log(currentTime);
+							// console.log(startTime);
 							history.push('/done');
 						}
 						let sec = 0;

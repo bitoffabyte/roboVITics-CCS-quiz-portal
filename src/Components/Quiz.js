@@ -26,15 +26,24 @@ const Landing = ({ updateMail, updateAuth }) => {
 	// const [fb, ufb] = useState(firebase.auth().currentUser.email);
 
 	const rules = [
-		'Make sure that you attempt the exam from a laptop/desktop and have good internet connectivity. ',
-		'The duration of the test is 1 hour. An additional 15 minutes will be provided at the end for uploading the answer script. No extra time will be provided.',
-		'No change of slots will be entertained (under critical circumstances get in touch with your mentors).',
-		'No malpractices should be followed while giving the exam. Anyone found doing so will be debarred from the exam.',
+		'Make sure that you attempt the exam from a laptop/desktop and have good internet connectivity.',
+		'The duration of the test is 1 hr and 15 mins extra will be provided at the end for uploading the answer sheet. No extra time will be provided.',
+		'No change of slots will be entertained (under critical circumstances get in touch with your mentors). ',
+		'No malpractices should be followed while giving the exam. Anyone found doing so will be exempted from the exam',
 		'In case, any issues are faced while attempting the exam, the assigned mentor only should be contacted.',
-		'There are multiple sections in the test. It is mandatory to attempt the Management and logical reasoning sections and at least one of the three technical sections provided (CSE, Electrical , Mechanical). You can attempt multiple sections.',
-		'For MCQs, write down the option as well as the answer clearly [ex: b) python].',
-		'Answers should be written on paper only, scanned (as a pdf)  and uploaded with the name of the file in the following format: FirstName_LastName_RegistrationNumber.pdf.',
-		'If file upload is not working, contact your mentor within the 15 min upload time',
+		'It’s great to have choices in the life but it is mandatory to attempt the Management and logical reasoning and at least one of the three technical sections provided (CSE, Electrical, Mechanical). You can attempt multiple sections.',
+		'In all technical sections you will be rewarded 3 marks and -1 for wrong answer',
+		'There is no negative marking in the Logic and Management sections.',
+		'For MCQs, write down the option as well as the answer [ex: b) python].',
+		'Answers should be written on paper only, scanned (as a pdf) and uploaded with the name of the file in the following format: Name_RegistrationNumber.',
+		'It is natural to feel “there are many better than me in the class”. Do not validate by looking in their papers. (DO NOT COPY)',
+		'You cannot use mobile phone or calculator during examination.',
+		'Writing a test is about what you know and not what you hope to get out of luck. (Write the answer only when you are sure)',
+		'Enjoy solving the paper from your heart as if you have met your soul mate. Show all your zeal and enthusiasm to attempt the questions.',
+		'If you know nothing don’t be disheartened, even “Jon Snow knows nothing”.',
+		'It is advised for you to attempt your preferred technical section first. Only after that, attempt the questions from other sections. ',
+		'You can use the language of your preferance for CSE coding questions',
+		'Do not forget to fill the form before leaving the exam hall	',
 	];
 	const handleClick = () => {
 		updateLoading(true);

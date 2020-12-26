@@ -63,6 +63,8 @@
 ul {
 	width: 85%;
 	margin-right: 0px;
+	/* height: 50%; */
+	overflow: auto;
 }
 ul li {
 	color: #c4c4c4;
@@ -70,7 +72,7 @@ ul li {
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 0.9vw;
+	font-size: 1vw;
 	line-height: 1.2vw;
 	margin: 2% 0;
 
@@ -99,8 +101,9 @@ ul li {
 
 .qlab {
 	text-align: left;
-	transform: translate(10%, -85%);
+	transform: translate(10%, -65%);
 	height: auto !important;
+	overflow: auto;
 }
 .qlanding {
 	margin-top: 5%;
@@ -217,4 +220,29 @@ ul li {
 }
 ul {
 	margin-right: 0px !important;
+}
+::-webkit-scrollbar {
+	width: 10px;
+	width: 5px;
+	height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #0059ff;
+	height: 180px;
+	border-radius: 32px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+.foto3 {
+	transform: translate(-10%, -50%);
 }
