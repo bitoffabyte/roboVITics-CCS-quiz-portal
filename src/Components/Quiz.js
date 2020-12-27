@@ -48,7 +48,7 @@ const Landing = ({ updateMail, updateAuth }) => {
 	];
 	const handleClick = () => {
 		updateLoading(true);
-		if (pass == 'O@t4F^s8N!)') {
+		if (pass == 'T(e7S%f3T!') {
 			const det = { email: mail.current };
 
 			$.post(
