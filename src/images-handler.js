@@ -19,7 +19,7 @@ import img57m from './img/img57m.jpeg';
 import img58m from './img/img58m.jpeg';
 
 export default (img) => {
-	console.log(img);
+	// console.log(img);
 	if (img == 'img2e.png') return <img src={img2e} className='qimg' />;
 	if (img == 'img4m.jpeg') return <img src={img4m} className='qimg' />;
 	if (img == 'img9e.png') return <img src={img9e} className='qimg' />;
