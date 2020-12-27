@@ -10,7 +10,6 @@ import firebase from 'firebase';
 import { signIn } from '../firebase-codes';
 import { Redir } from '../HandleRedir';
 import Loader from 'react-loader-spinner';
-
 const Landing = ({ updateMail }) => {
 	const history = useHistory();
 	const [width, setWidth] = useState(window.innerWidth);
